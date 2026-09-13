@@ -1,4 +1,4 @@
-namespace FavoriteGames.Web.Models;
+namespace FavoriteGames.Models;
 
 public class Game
 {

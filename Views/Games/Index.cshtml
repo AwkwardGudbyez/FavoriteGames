@@ -1,0 +1,8 @@
+@model List<Game>
+@foreach (var game in Model)
+{
+    <div class="game">
+        <h2>@game.Name</h2>
+        <a href="/Games/Details/@game.Id">View Details</a>
+    </div>
+}
