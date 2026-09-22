@@ -1,4 +1,9 @@
 @model List<Game>
+
+@{
+    ViewData["Title"] = "Games";
+}
+
 @foreach (var game in Model)
 {
     <div class="game">
@@ -6,3 +11,4 @@
         <a href="/Games/Details/@game.Id">View Details</a>
     </div>
 }
+
