@@ -4,6 +4,7 @@
     ViewData["Title"] = "Games";
 }
 
+<a asp-controller="Games" asp-action="Create">Add a Game</a>
 @foreach (var game in Model)
 {
     <partial name="_GameCard" model="game" />

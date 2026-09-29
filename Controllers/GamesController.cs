@@ -19,4 +19,8 @@ public class GamesController : Controller
         }
         return View(game);
     }
+    public IActionResult Create()
+    {
+        return View();
+    }
 }
