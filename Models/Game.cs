@@ -11,6 +11,8 @@ public class Game
     public string Name {get;set;}="";
     public string Genre {get;set;}="";
     public string Developer {get;set;}="";
+
+    [Range(1900, 2030)]
     public int YearReleased {get;set;}
 
 }

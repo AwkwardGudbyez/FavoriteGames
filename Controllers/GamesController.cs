@@ -23,4 +23,17 @@ public class GamesController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Create(Game game)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(game);
+        }
+        game.Id = GameData.All.Max(g => g.Id) +1;
+        GameData.All.Add(game);
+
+        return RedirectToAction(nameof(Index));
+    }
 }
