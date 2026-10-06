@@ -1,18 +1,27 @@
-using FavoriteGames.Models;
 using Microsoft.AspNetCore.Mvc;
+using FavoriteGames.Models;
+using FavoriteGames.Web.Data;
+
 
 namespace FavoriteGames.Controllers;
 
 public class GamesController : Controller
+
 {
+    private readonly GameContext _context;
+
+    public GamesController(GameContext context)
+    {
+        _context = context;
+    }
     public IActionResult Index()
     {
-        return View(GameData.All);
+        var featuredGame = _context.Games.FirstOrDefault();
+        return View(featuredGame);
     }
-
     public IActionResult Details(int id)
     {
-        var game = GameData.All.FirstOrDefault(g => g.Id == id);
+        var game = _context.Games.FirstOrDefault(g => g.Id == id);
         if (game == null)
         {
             return NotFound();
@@ -31,8 +40,8 @@ public class GamesController : Controller
         {
             return View(game);
         }
-        game.Id = GameData.All.Max(g => g.Id) +1;
-        GameData.All.Add(game);
+        _context.Games.Add(game);
+        _context.SaveChanges();
 
         return RedirectToAction(nameof(Index));
     }

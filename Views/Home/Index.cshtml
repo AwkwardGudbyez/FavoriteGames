@@ -1,6 +1,6 @@
-﻿@{
+﻿@model Game
+@{
     ViewData["Title"] = "Home";
-    var featuredGame = GameData.All[0];
 }
 
 <div class="text-center">
@@ -9,7 +9,7 @@
 </div>
 
 <h2>Featured Game</h2>
-<partial name="_GameCard" model="featuredGame" />
+<partial name="_GameCard" model="Model" />
 
 @section Scripts {
     <script src="https://jgrissom.github.io/dotnet-web-dev/week-07/homework-checks.js"></script>
