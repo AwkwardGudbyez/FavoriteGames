@@ -1,14 +1,23 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FavoriteGames.Models;
+using FavoriteGames.Web.Data;
 
 namespace FavoriteGames.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly GameContext _context;
+
+    public HomeController(GameContext context)
+    {
+        _context = context;
+    }
+
     public IActionResult Index()
     {
-        return View();
+        var featuredGame = _context.Games.FirstOrDefault();
+        return View(featuredGame);
     }
 
     public IActionResult Privacy()
