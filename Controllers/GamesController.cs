@@ -96,6 +96,38 @@ public class GamesController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var game = await _context.Games
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (game == null)
+        {
+            return NotFound();
+        }
+
+        return View(game);
+    }
+
+    // POST: GamesScaffold/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var game = await _context.Games.FindAsync(id);
+        if (game != null)
+        {
+            _context.Games.Remove(game);
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
     private bool GameExists(int id)
 {
     return _context.Games.Any(e => e.Id == id);

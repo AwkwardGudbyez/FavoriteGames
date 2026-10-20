@@ -5,6 +5,7 @@
         <p><span>Genre: </span>@Model.Genre</p>
         <p><span>Release Year: </span>@Model.YearReleased</p>
         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Game</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Game</a>
     </div>
 
 @{
