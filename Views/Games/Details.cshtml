@@ -4,6 +4,7 @@
         <p><span>Developed By: </span>@Model.Developer</p>
         <p><span>Genre: </span>@Model.Genre</p>
         <p><span>Release Year: </span>@Model.YearReleased</p>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Game</a>
     </div>
 
 @{
