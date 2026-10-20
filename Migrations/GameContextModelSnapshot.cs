@@ -16,7 +16,7 @@ namespace FavoriteGames.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.12")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -41,6 +41,9 @@ namespace FavoriteGames.Migrations
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
+
+                    b.Property<int?>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<int>("YearReleased")
                         .HasColumnType("int");

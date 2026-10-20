@@ -48,7 +48,7 @@ public class GamesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Genre,Developer,YearReleased")] Game game)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Genre,Developer,YearReleased,Rating")] Game game)
     {
         if (id != game.Id)
         {

@@ -15,4 +15,7 @@ public class Game
     [Range(1900, 2030)]
     public int YearReleased {get;set;}
 
+    [Range(1, 10, ErrorMessage = "Rating must be between 1 and 10.")]
+    public int? Rating { get; set; }
+
 }
