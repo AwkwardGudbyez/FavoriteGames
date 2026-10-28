@@ -17,5 +17,6 @@ public class Game
 
     [Range(1, 10, ErrorMessage = "Rating must be between 1 and 10.")]
     public int? Rating { get; set; }
+    public ICollection<GameReview> Reviews { get; set; } = new List<GameReview>();
 
 }
