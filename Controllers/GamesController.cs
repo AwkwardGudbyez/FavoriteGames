@@ -19,9 +19,12 @@ public class GamesController : Controller
         return View(_context.Games.ToList());
     }
 
+
     public IActionResult Details(int id)
     {
-        var game = _context.Games.FirstOrDefault(g => g.Id == id);
+        var game = _context.Games
+            .Include(g => g.Reviews)
+            .FirstOrDefault(g => g.Id == id);
 
         if (game == null)
         {
@@ -32,19 +35,19 @@ public class GamesController : Controller
     }
 
     public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var game = await _context.Games.FindAsync(id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-            return View(game);
+            return NotFound();
         }
+
+        var game = await _context.Games.FindAsync(id);
+        if (game == null)
+        {
+            return NotFound();
+        }
+        return View(game);
+    }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -129,7 +132,7 @@ public class GamesController : Controller
     }
 
     private bool GameExists(int id)
-{
-    return _context.Games.Any(e => e.Id == id);
-}
+    {
+        return _context.Games.Any(e => e.Id == id);
+    }
 }
