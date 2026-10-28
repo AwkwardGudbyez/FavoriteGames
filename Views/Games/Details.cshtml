@@ -1,4 +1,10 @@
+
 @model Game
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
 <div class="game-details">
     <h1>@Model.Name</h1>
     <p><span>Developed By: </span>@Model.Developer</p>
@@ -8,10 +14,37 @@
         <span>Rating: </span>
         @(Model.Rating.HasValue ? $"{Model.Rating}/10" : "Not Rated")
     </p>
+
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Game</a>
     <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Game</a>
 </div>
 
-@{
-    ViewData["Title"] = Model.Name;
+<hr />
+
+<h2>Game Reviews</h2>
+
+@if (Model.Reviews.Any())
+{
+    @foreach (var review in Model.Reviews)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@review.ReviewerName</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Score: @review.Score/10
+                </h6>
+                <p class="card-text">@review.Comment</p>
+            </div>
+        </div>
+    }
 }
+else
+{
+    <p>No reviews yet for this game.</p>
+}
+
+<a asp-controller="GameReviews"
+   asp-action="Create"
+   class="btn btn-success">
+    Write a Review
+</a>
