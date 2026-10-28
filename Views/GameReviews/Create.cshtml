@@ -1,0 +1,75 @@
+
+@model FavoriteGames.ViewModels.GameReviewFormViewModel
+
+@{
+    ViewData["Title"] = "Write a Review";
+}
+
+<h1>Write a Game Review</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Review.GameId"
+               class="form-label">Game</label>
+
+        <select asp-for="Review.GameId"
+                asp-items="Model.Games"
+                class="form-select">
+            <option value="">Select a Game</option>
+        </select>
+
+        <span asp-validation-for="Review.GameId"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Review.ReviewerName"
+               class="form-label">Reviewer Name</label>
+
+        <input asp-for="Review.ReviewerName"
+               class="form-control" />
+
+        <span asp-validation-for="Review.ReviewerName"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Review.Score"
+               class="form-label">Score (1-10)</label>
+
+        <input asp-for="Review.Score"
+               class="form-control" />
+
+        <span asp-validation-for="Review.Score"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Review.Comment"
+               class="form-label">Review</label>
+
+        <textarea asp-for="Review.Comment"
+                  class="form-control"
+                  rows="4"></textarea>
+
+        <span asp-validation-for="Review.Comment"
+              class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Submit Review
+    </button>
+
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="btn btn-secondary">
+        Cancel
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
