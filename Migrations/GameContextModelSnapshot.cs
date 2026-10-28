@@ -94,6 +94,79 @@ namespace FavoriteGames.Migrations
                             YearReleased = 2015
                         });
                 });
+
+            modelBuilder.Entity("FavoriteGames.Models.GameReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewerName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameReviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "One of the best RPGs I've ever played!",
+                            GameId = 1,
+                            ReviewerName = "Alik",
+                            Score = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "An incredible MMORPG with years of adventures.",
+                            GameId = 2,
+                            ReviewerName = "Alik",
+                            Score = 9
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Survival, dinosaurs, and exploration. What's not to love?",
+                            GameId = 3,
+                            ReviewerName = "Alik",
+                            Score = 8
+                        });
+                });
+
+            modelBuilder.Entity("FavoriteGames.Models.GameReview", b =>
+                {
+                    b.HasOne("FavoriteGames.Models.Game", "Game")
+                        .WithMany("Reviews")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("FavoriteGames.Models.Game", b =>
+                {
+                    b.Navigation("Reviews");
+                });
 #pragma warning restore 612, 618
         }
     }
