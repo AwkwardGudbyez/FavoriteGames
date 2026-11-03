@@ -1,6 +1,41 @@
 @model FavoriteGames.Models.Game
 
-<div class="game">
-    <h2>@Model.Name</h2>
-    <a href="/Games/Details/@Model.Id">View Details</a>
+<div class="card bg-dark border-secondary shadow-sm mb-4">
+    <div class="card-body p-4">
+
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <h2 class="card-title h4 fw-bold mb-2">
+                🎮 @Model.Name
+            </h2>
+
+            @if (Model.Rating.HasValue)
+            {
+                <span class="badge bg-primary fs-6">
+                    ⭐ @Model.Rating/10
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">
+                    Not Rated
+                </span>
+            }
+        </div>
+
+        <p class="text-muted mb-3">
+            @Model.Genre | @Model.YearReleased
+        </p>
+
+        <p class="mb-3">
+            <strong>Developer:</strong> @Model.Developer
+        </p>
+
+        <a asp-controller="Games"
+           asp-action="Details"
+           asp-route-id="@Model.Id"
+           class="btn btn-primary">
+            View Game Details
+        </a>
+
+    </div>
 </div>
