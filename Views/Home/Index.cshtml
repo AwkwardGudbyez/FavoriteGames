@@ -1,16 +1,36 @@
 ﻿@model Game
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Welcome";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center py-5">
+    <h1 class="display-4 fw-bold">Welcome to Favorite Games 🎮</h1>
+
+    <p class="lead mt-3">
+        Discover, explore, and keep track of your favorite video games!
+    </p>
+
+    <p class="mb-4">
+        Favorite Games is a collection for gamers who want to
+        organize their favorite titles, discover new games,
+        and share what makes each game special.
+    </p>
+
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="btn btn-primary btn-lg">
+        🎮 Explore Games
+    </a>
 </div>
 
-<h2>Featured Game</h2>
-<partial name="_GameCard" model="Model" />
+@if (Model != null)
+{
+    <div class="mt-4">
+        <h2 class="mb-3">Featured Game</h2>
+        <partial name="_GameCard" model="Model" />
+    </div>
+}
 
 @section Scripts {
-    <script src="https://jgrissom.github.io/dotnet-web-dev/week-09/homework-checks.js"></script>
+    <script src="https://jgrissom.github.io/dotnet-web-dev/week-10/homework-checks.js"></script>
 }
