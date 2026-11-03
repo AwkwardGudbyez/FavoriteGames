@@ -4,35 +4,93 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="game-details">
-    <h1>@Model.Name</h1>
-    <p><span>Developed By: </span>@Model.Developer</p>
-    <p><span>Genre: </span>@Model.Genre</p>
-    <p><span>Release Year: </span>@Model.YearReleased</p>
-    <p>
-        <span>Rating: </span>
-        @(Model.Rating.HasValue ? $"{Model.Rating}/10" : "Not Rated")
-    </p>
+<div class="card bg-dark border-secondary shadow-sm mb-4">
+    <div class="card-body p-4">
 
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Game</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Game</a>
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+            <h1 class="fw-bold mb-0">🎮 @Model.Name</h1>
+
+            @if (Model.Rating.HasValue)
+            {
+                <span class="badge bg-primary fs-5">
+                    ⭐ @Model.Rating/10
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-secondary fs-6">
+                    Not Rated
+                </span>
+            }
+        </div>
+
+        <hr />
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <p class="text-muted mb-1">Developer</p>
+                <h5>@Model.Developer</h5>
+            </div>
+
+            <div class="col-md-4">
+                <p class="text-muted mb-1">Genre</p>
+                <h5>@Model.Genre</h5>
+            </div>
+
+            <div class="col-md-4">
+                <p class="text-muted mb-1">Release Year</p>
+                <h5>@Model.YearReleased</h5>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn btn-primary">
+                ✏️ Edit Game
+            </a>
+
+            <a asp-action="Delete"
+               asp-route-id="@Model.Id"
+               class="btn btn-outline-danger">
+                🗑️ Delete Game
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-outline-light">
+                Back to Games
+            </a>
+        </div>
+    </div>
 </div>
 
-<hr />
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+    <h2 class="mb-0">⭐ Game Reviews</h2>
 
-<h2>Game Reviews</h2>
+    <a asp-controller="GameReviews"
+       asp-action="Create"
+       class="btn btn-success">
+        Write a Review
+    </a>
+</div>
 
 @if (Model.Reviews.Any())
 {
     @foreach (var review in Model.Reviews)
     {
-        <div class="card mb-3">
+        <div class="card bg-dark border-secondary mb-3">
             <div class="card-body">
-                <h5 class="card-title">@review.ReviewerName</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    Score: @review.Score/10
-                </h6>
-                <p class="card-text">@review.Comment</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-2">@review.ReviewerName</h5>
+
+                    <span class="badge bg-primary">
+                        ⭐ @review.Score/10
+                    </span>
+                </div>
+
+                <p class="card-text mt-2 mb-0">
+                    @review.Comment
+                </p>
             </div>
         </div>
     }
@@ -45,12 +103,11 @@ else
             Nobody has reviewed this game yet.
             Be the first to share your thoughts!
         </p>
-        <a asp-controller="GameReviews" asp-action="Create" class="btn btn-primary">
+
+        <a asp-controller="GameReviews"
+           asp-action="Create"
+           class="btn btn-primary">
             Write the First Review
         </a>
     </div>
 }
-
-<a asp-controller="GameReviews" asp-action="Create" class="btn btn-success">
-    Write a Review
-</a>
