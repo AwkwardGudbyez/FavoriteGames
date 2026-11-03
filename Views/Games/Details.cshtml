@@ -1,4 +1,3 @@
-
 @model Game
 
 @{
@@ -40,11 +39,18 @@
 }
 else
 {
-    <p>No reviews yet for this game.</p>
+    <div class="alert alert-info">
+        <h4>No reviews yet!</h4>
+        <p>
+            Nobody has reviewed this game yet.
+            Be the first to share your thoughts!
+        </p>
+        <a asp-controller="GameReviews" asp-action="Create" class="btn btn-primary">
+            Write the First Review
+        </a>
+    </div>
 }
 
-<a asp-controller="GameReviews"
-   asp-action="Create"
-   class="btn btn-success">
+<a asp-controller="GameReviews" asp-action="Create" class="btn btn-success">
     Write a Review
 </a>
