@@ -4,9 +4,31 @@
     ViewData["Title"] = "Games";
 }
 
-<a asp-controller="Games" asp-action="Create">Add a Game</a>
-@foreach (var game in Model)
-{
-    <partial name="_GameCard" model="game" />
-}
+<h1>Game Collection 🎮</h1>
 
+<p>Explore the games in our collection or add one of your favorites!</p>
+
+<a asp-controller="Games" asp-action="Create" class="btn btn-primary mb-4">
+    ➕ Add a Game
+</a>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <h4>No games found!</h4>
+        <p>
+            Our collection is currently empty.
+            Be the first to add a game!
+        </p>
+        <a asp-controller="Games" asp-action="Create" class="btn btn-primary">
+            Add Your First Game
+        </a>
+    </div>
+}
+else
+{
+    @foreach (var game in Model)
+    {
+        <partial name="_GameCard" model="game" />
+    }
+}
