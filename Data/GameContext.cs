@@ -1,10 +1,10 @@
-
 using FavoriteGames.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FavoriteGames.Web.Data;
 
-public class GameContext : DbContext
+public class GameContext : IdentityDbContext<ApplicationUser>
 {
     public GameContext(DbContextOptions<GameContext> options) : base(options)
     {}
@@ -14,6 +14,8 @@ public class GameContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Game>().HasData(
             new Game { Id = 1, Name = "Baldur's Gate 3", Genre = "RPG", Developer = "Larion Studios", YearReleased = 2023 },
             new Game { Id = 2, Name = "World of Warcraft", Genre = "MMORPG", Developer = "Blizzard Entertainment", YearReleased = 2004 },
