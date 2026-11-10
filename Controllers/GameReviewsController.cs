@@ -5,9 +5,10 @@ using FavoriteGames.Web.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FavoriteGames.Controllers;
-
+[Authorize]
 public class GameReviewsController : Controller
 {
     private readonly GameContext _context;

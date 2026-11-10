@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using FavoriteGames.Models;
 using FavoriteGames.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FavoriteGames.Controllers;
 
+
+[Authorize]
 public class GamesController : Controller
 {
     private readonly GameContext _context;
@@ -14,12 +17,13 @@ public class GamesController : Controller
         _context = context;
     }
 
+[AllowAnonymous]
     public IActionResult Index()
     {
         return View(_context.Games.ToList());
     }
 
-
+[AllowAnonymous]
     public IActionResult Details(int id)
     {
         var game = _context.Games
