@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<h1>Access Denied</h1>
+
+<p>
+    You do not have permission to modify games.
+    Only users with the GameAdmin role can create,
+    edit, or delete games.
+</p>
+
+<a asp-controller="Games" asp-action="Index">
+    Return to Games
+</a>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace FavoriteGames.Controllers;
 
 
-[Authorize]
+[Authorize(Roles = "GameAdmin")]
 public class GamesController : Controller
 {
     private readonly GameContext _context;

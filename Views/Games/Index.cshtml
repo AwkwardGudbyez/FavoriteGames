@@ -8,9 +8,12 @@
 
 <p>Explore the games in our collection or add one of your favorites!</p>
 
-<a asp-controller="Games" asp-action="Create" class="btn btn-primary mb-4">
-    ➕ Add a Game
-</a>
+@if (User.IsInRole("GameAdmin"))
+{
+    <a asp-controller="Games" asp-action="Create" class="btn btn-primary mb-4">
+        ➕ Add a Game
+    </a>
+}
 
 @if (!Model.Any())
 {
@@ -20,9 +23,12 @@
             Our collection is currently empty.
             Be the first to add a game!
         </p>
-        <a asp-controller="Games" asp-action="Create" class="btn btn-primary">
-            Add Your First Game
-        </a>
+        @if (User.IsInRole("GameAdmin"))
+        {
+            <a asp-controller="Games" asp-action="Create" class="btn btn-primary">
+                Add Your First Game
+            </a>
+        }
     </div>
 }
 else

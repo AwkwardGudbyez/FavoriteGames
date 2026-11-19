@@ -23,6 +23,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    await RoleSeeder.SeedAsync(scope.ServiceProvider, app.Configuration);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
